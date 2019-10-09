@@ -81,48 +81,43 @@ task display(){
 	}
 }
 task control(){
-	while(vexRT[Btn8U] == 0 && SensorValue[bumber] == 0){}
-	while(1 == 1){
-		hogCPU();
-		motor[rightMotor]  = vexRT[Ch2];  // (y + x)/2
-		motor[leftMotor] = vexRT[Ch3];  // (y + x)/2
+	bool active = true;
+	while(1==1){
+		if (!(vexRT[Btn8U] == 0 && SensorValue[bumber] == 0)){active = true;}
+		while(active){
+			hogCPU();
+			motor[rightMotor]  = vexRT[Ch2];  // (y + x)/2
+			motor[leftMotor] = vexRT[Ch3];
 
 // Raise, lower or do not move arm
-		if(vexRT[Btn5D] == 1)       	//If button 5U is pressed...
-		{
-			motor[verticleClawMotor] = 127;    	//...raise the arm.
-		}
-		else if(vexRT[Btn5U] == 1)  	//Else, if button 5D is pressed...
-		{
-			motor[verticleClawMotor] = -127;   	//...lower the arm.
-		}
-		else                      		//Else (neither button is pressed)...
-		{
-			motor[verticleClawMotor] = 0;      	//...stop the arm.
-		}
+			if(vexRT[Btn5D] == 1){
+				motor[verticleClawMotor] = 127;    	//...raise the arm.
+			}
+			else if(vexRT[Btn5U] == 1){
+				motor[verticleClawMotor] = -127;   	//...lower the arm.
+			}
+			else{
+				motor[verticleClawMotor] = 0;      	//...stop the arm.
+			}
 
 // Open, close or do not move claw
-		if(vexRT[Btn6U] == 1)       	//If Button 6U is pressed...
-		{
-			motor[clawMotor] = 127;  		//...close the gripper.
-		}
-		else if(vexRT[Btn6D] == 1)  	//Else, if button 6D is pressed...
-		{
-			motor[clawMotor] = -127; 		//...open the gripper.
-		}
-		else                      		//Else (neither button is pressed)...
-		{
-			motor[clawMotor] = 0;    		//...stop the gripper.
-		}
-		if (vexRT[Btn8D] > 0){
-			wait1Msec(500);
-			releaseCPU();
-	 		StartTask(display);
-	 		StopTask(control);
-	 		StartTask(control);
+			if(vexRT[Btn6U] == 1){
+				motor[clawMotor] = 127;}
+			else if(vexRT[Btn6D] == 1){
+				motor[clawMotor] = -127; 		//...open the gripper.
+			}
+			else{
+				motor[clawMotor] = 0;    		//...stop the gripper.
+				}
+			if (vexRT[Btn8D] > 0){
+				wait1Msec(500);
+				active = false;
+				releaseCPU();
+	 			StartTask(display);
+				}
+			}
 		}
 	}
-}
 void stopMotor() {
 	motor[leftMotor] = 0;
 	motor[rightMotor] = 0;
