@@ -58,7 +58,7 @@ const int FULL_FORWARD = 127;
 const int BASE_DIST = 518;
 const float BASE_DEG = 36/11;
 bool b_f = true;
-
+#include Safteytask;
 bool turns[14] = {true, false, false, true, true, false, true, true ,false, true, true, false, true, true};
 task display(){
 		bLCDBacklight = true;									// Turn on LCD Backlight
