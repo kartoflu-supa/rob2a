@@ -55,9 +55,9 @@
 |*		Analog port 1       poteniometer				VEX 3-wire module			Claw poteniometer									*|
 \*----------------------------------------------------------------------------------------------------*/
 const int FULL_FORWARD = 127;
-const int BASE_DIST = 518;
+//const int BASE_DIST = 518;
 const float BASE_DEG = 36/11;
-bool b_f = true;
+//bool b_f = true;
 
 task display(){
 		bLCDBacklight = true;									// Turn on LCD Backlight
@@ -79,16 +79,10 @@ task display(){
 		wait1Msec(100);
 	}
 }
-/*task control(){
-	bool active = true;
-	while(1==1){
-		if (SensorValue[sonar] > 0){
-		while(abs(SensorValue[leftEncoder]) < turn_num || abs(SensorValue[rightEncoder]) < turn_num){
-		if (abs(SensorValue[leftEncoder]) < turn_num){motor[leftMotor] = FULL_FORWARD * -1;}
-		if (abs(SensorValue[rightEncoder])< turn_num){motor[rightMotor] = FULL_FORWARD;}
-		}
-	}
-		if (!(vexRT[Btn8U] == 0 && SensorValue[bumber] == 0)){active = true;}
+task control(){
+	bool active = false;
+		if (!(vexRT[Btn8U] == 0 && SensorValue[bumber] == 0)){
+			active = true;}
 		while(active){
 			hogCPU();
 			motor[rightMotor]  = vexRT[Ch2];  // (y + x)/2
@@ -122,7 +116,6 @@ task display(){
 				}
 			}
 		}
-	}*/
 void stopMotor() {
 	motor[leftMotor] = 0;
 	motor[rightMotor] = 0;
@@ -172,11 +165,7 @@ void drive(int driveDistance, bool b_f){
 task main()
 {
 	StartTask(display);
-	//StartTask(control);
-	int son;
-	while (1==1) {
-			son = SensorValue[sonar];
-	}
+	StartTask(control);
 	stopMotor();
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
