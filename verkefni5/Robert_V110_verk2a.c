@@ -54,12 +54,9 @@
 |*		Digital port 10-11  leftEncoder				  VEX 3-wire module			Right side encoder								*|
 |*		Analog port 1       poteniometer				VEX 3-wire module			Claw poteniometer									*|
 \*----------------------------------------------------------------------------------------------------*/
-const int FULL_FORWARD = 127;
-//const int BASE_DIST = 518;
-const float BASE_DEG = 36/11;
 bool l_s = false;
 bool r_s = false;
-int lineThreshold = 500;  //Change after what the line sensor seeswq
+
 task display(){
 		bLCDBacklight = true;									// Turn on LCD Backlight
 	string mainBattery, backupBattery;
