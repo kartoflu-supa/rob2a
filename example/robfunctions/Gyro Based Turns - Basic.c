@@ -19,13 +19,13 @@ Analog Port 8       in8                 VEX Gyro              Top-center mounted
 ----------------------------------------------------------------------------------------------------*/
 void turn_giro(int degrees10,bool counterclock){
 	//Completely clear out any previous sensor readings by setting the port to "sensorNone"
-	SensorType[in7] = sensorNone;
+	SensorType[in1] = sensorNone;
   wait1Msec(1000);
   //Reconfigure Analog Port 7 as a Gyro sensor and allow time for ROBOTC to calibrate it
-  SensorType[in7] = sensorGyro;
+  SensorType[in1] = sensorGyro;
   wait1Msec(2000);
 
-  while(abs(SensorValue[in7]) < degrees10)
+  while(abs(SensorValue[in1]) < degrees10)
   {
 		if (counterclock){
 		motor[rightMotor] = 70;
