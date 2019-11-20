@@ -3,6 +3,11 @@ void resetEncoder(){
 	SensorValue[rightEncoder] = 0;
 }
 
+void stopMotor() {
+	motor[leftMotor] = 0;
+	motor[rightMotor] = 0;
+}
+
 void turn90(bool l_r) {
 	int turn_num = BASE_DEG*80;
 	resetEncoder();
@@ -39,9 +44,6 @@ task display(){
 		wait1Msec(100);
 	}
 }
-
-
-
 
 task control(){
 	bool active = true;
@@ -81,28 +83,22 @@ task control(){
 			}
 		}
 	}
-void stopMotor() {
-	motor[leftMotor] = 0;
-	motor[rightMotor] = 0;
-}
-void resetEncoder(){
-	SensorValue[leftEncoder] = 0;
-	SensorValue[rightEncoder] = 0;
-}
-
-void turn90(bool l_r) {
-	int turn_num = BASE_DEG*80;
-	resetEncoder();
-	if (l_r) {
-		while(abs(SensorValue[leftEncoder]) < turn_num || abs(SensorValue[rightEncoder]) < turn_num){
-
-		if (abs(SensorValue[leftEncoder]) < turn_num){motor[leftMotor] = FULL_FORWARD;}
-		if (abs(SensorValue[rightEncoder]) < turn_num){motor[rightMotor] = FULL_FORWARD * -1;}
-	}}
-	else {
-		while(abs(SensorValue[leftEncoder]) < turn_num || abs(SensorValue[rightEncoder]) < turn_num){
-		if (abs(SensorValue[leftEncoder]) < turn_num){motor[leftMotor] = FULL_FORWARD * -1;}
-		if (abs(SensorValue[rightEncoder])< turn_num){motor[rightMotor] = FULL_FORWARD;}
-	}}
+	void drive(int driveDistance, bool b_f){
+	int dir = (b_f)? (1):(-1);
+		resetEncoder();
+		while (SensorValue[leftEncoder] < driveDistance && SensorValue[rightEncoder] < driveDistance){
+		if (SensorValue[leftEncoder] < SensorValue[rightEncoder]){
+				motor[leftMotor] = FULL_FORWARD*dir;
+				motor[rightMotor] = (FULL_FORWARD-13)*dir;
+		}
+		if (SensorValue[leftEncoder] > SensorValue[rightEncoder]){
+				motor[leftMotor] = (FULL_FORWARD-13)*dir;
+				motor[rightMotor] = FULL_FORWARD*dir;
+		}
+		if (SensorValue[leftEncoder] == SensorValue[rightEncoder]){
+				motor[leftMotor] = FULL_FORWARD*dir;
+				motor[rightMotor] = FULL_FORWARD*dir;
+	 }
+	}
 	stopMotor();
 }
