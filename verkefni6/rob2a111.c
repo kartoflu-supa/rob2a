@@ -30,6 +30,7 @@
 |*		Digital port 10-11  leftEncoder				  VEX 3-wire module			Right side encoder								*|
 |*		Analog port 1       poteniometer				VEX 3-wire module			Claw poteniometer									*|
 \*----------------------------------------------------------------------------------------------------*/
+
 task main()
 {
 
