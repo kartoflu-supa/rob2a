@@ -17,11 +17,13 @@
 
 #include "../Headers/consts.h"
 #include "../Functions/funcs.c"
-int path[] = {7,0};
+
+int path[] = {6,1,4,1,3,1,5,2,3,1,3,1,6,2,4,1,4,1,5,2,4,1,4,1,6,
+	2,4,1,1,3,1,5,2,3,1,1,4,1,6,2,4,1,1,1,4,1,5,2,4,1,1,1,4,1,6,0};
 /*
 0=Stop
 1=drive forwards
-2=drive backwards
+2=drive backwsrds
 3=turn left
 4=turn Right
 5=grab
@@ -49,7 +51,7 @@ task main()
 StartTask(control);
 StartTask(display);
 while (path[spot] != 0) {
-	switch (path[spot]){
+	switch (path[spot++]){
 	case 1: {
 		//drive Forward
 		drive(BASE_DIST,true);
@@ -70,19 +72,26 @@ while (path[spot] != 0) {
 		//grab
 		motor[clawMotor] = 127;
 		wait1Msec(100);
+		motor[clawMotor] = 0;
 	}
 	case 6: {
 		//release
 		motor[clawMotor] = -127;
 		wait1Msec(100);
+		motor[clawMotor] = 0;
 	}
 	case 7: {
 		//party
+		motor[verticleClawMotor] = 127;
+		wait1Msec(200);
+		motor[verticleClawMotor] = 0;
 		turn90(true);
 		turn90(false);
 		turn90(false);
 		turn90(true);
 	}
+	wait1Msec(1000);
 	}
+	wait1Msec(1000);
 }
 }
