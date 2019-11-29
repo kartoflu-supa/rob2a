@@ -7,7 +7,22 @@ void stopMotor() {
 	motor[leftMotor] = 0;
 	motor[rightMotor] = 0;
 }
-
+void gyro_turn(int deg){
+	SensorValue[turnAngle] = 0;
+	int gyroadd = deg * 10;
+	while (SensorValue[turnAngle] + gyroadd != 0){
+			motor[leftMotor] = 32 + SensorValue[turnAngle] + gyroadd;
+			motor[rightMotor] = 32 - (SensorValue[turnAngle] + gyroadd);
+	}
+}
+void gyre_drive(){
+	resetEncoder();
+	SensorValue[turnAngle] = 0;
+	while (SensorValue[leftEncoder] < BASE_DIST){
+		motor[leftMotor] = 32 + SensorValue[turnAngle];
+		motor[rightMotor] = 32 - (SensorValue[turnAngle]);
+	}
+}
 void turn90(bool l_r) {
 	int turn_num = BASE_DEG*80;
 	resetEncoder();
@@ -83,8 +98,8 @@ task control(){
 			}
 		}
 	}
-	void drive(int driveDistance, bool b_f){
-	int dir = (b_f)? (1):(-1);
+void drive(int driveDistance, bool b_f){
+	int dir = (b_f) ? (1):(-1);
 		resetEncoder();
 		while (SensorValue[leftEncoder] < driveDistance && SensorValue[rightEncoder] < driveDistance){
 		if (SensorValue[leftEncoder] < SensorValue[rightEncoder]){
