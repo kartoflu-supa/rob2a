@@ -9,7 +9,7 @@
 * [Verkefni 4](verkefni4/verkefni4.md)	Keyra án þess að rekast á (Sónar) og light sensor	10%
 * [Verkefni 5](verkefni5/verkefni5.md)	Fylgja línu 	15%
 * [Verkefni 6](verkefni6/verkefni6.md)	Fylgja línu ,sækja bolta 20%
-* [Verkefni 7](verkefni7/Web/UserRober.html)	Lokaverkefni á tölvubraut	10%
+* [Verkefni 7](verkefni7/Web/UserRobert.html)	Lokaverkefni á tölvubraut	10%
 * [Verkefni 8](verkefni8/verkefni8.md)	Taka í sundur vélmenni og frágangur kistu (lykilmatsþáttur)	5%
 
 ### Námsefni frá VEX og Carnegie Mellon háskólanum
