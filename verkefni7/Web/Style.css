@@ -1,0 +1,21 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.image{
+    height: 700px;
+    width: 500px;
+}
+.grid{
+    display: grid;
+    grid-template-columns:auto auto;
+}
+.item1{
+    grid-row: 1 / span 2;
+    padding: 20px;
+}
+.item2{
+    padding: 20px;
+}
+.item3{
+    padding: 20px;
+}
